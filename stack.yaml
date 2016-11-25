@@ -1,0 +1,7 @@
+resolver: lts-7.10
+packages:
+- '.'
+extra-deps:
+- hasql-0.19.15.2
+flags: {}
+extra-package-dbs: []

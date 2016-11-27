@@ -11,7 +11,16 @@
 {-# LANGUAGE TypeFamilies          #-}
 {-# LANGUAGE TypeOperators         #-}
 {-# LANGUAGE UndecidableInstances  #-}
-module Hasql.Generic.HasParams (HasParams, HasEField, HasEValue, mkParams, mkEField, mkEValue, gParams, gEValue) where
+module Hasql.Generic.HasParams
+    ( HasParams
+    , HasEField
+    , HasEValue
+    , mkParams
+    , mkEField
+    , mkEValue
+    , gParams
+    , gEValue
+    ) where
 
 --------------------------------------------------------------------------------
 import qualified Data.Aeson.Types           as JSON

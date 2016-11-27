@@ -1,7 +1,6 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE DataKinds             #-}
 {-# LANGUAGE DefaultSignatures     #-}
-{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE FlexibleContexts      #-}
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
@@ -11,7 +10,16 @@
 {-# LANGUAGE TypeFamilies          #-}
 {-# LANGUAGE TypeOperators         #-}
 {-# LANGUAGE UndecidableInstances  #-}
-module Hasql.Generic.HasRow (HasRow, HasDField, HasDValue, gRow, gDValue) where
+module Hasql.Generic.HasRow
+    ( HasRow
+    , HasDField
+    , HasDValue
+    , mkRow
+    , mkDField
+    , mkDValue
+    , gRow
+    , gDValue
+    ) where
 
 --------------------------------------------------------------------------------
 import           BinaryParser

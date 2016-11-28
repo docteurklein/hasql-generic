@@ -5,6 +5,7 @@
 {-# LANGUAGE FlexibleContexts      #-}
 {-# LANGUAGE FlexibleInstances     #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE OverlappingInstances  #-}
 {-# LANGUAGE OverloadedStrings     #-}
 {-# LANGUAGE PolyKinds             #-}
 {-# LANGUAGE ScopedTypeVariables   #-}
@@ -199,27 +200,27 @@ instance HasEValue JSON.Value where
 
 
 --------------------------------------------------------------------------------
-instance {-# OVERLAPPING #-} HasEValue a => HasEField [Maybe a] where
+instance HasEValue a => HasEField [Maybe a] where
   {-# INLINE mkEField #-}
   mkEField = value $ array (arrayDimension foldl' (arrayNullableValue mkEValue))
 
-instance {-# OVERLAPPING #-} HasEValue a => HasEField [a] where
+instance HasEValue a => HasEField [a] where
   {-# INLINE mkEField #-}
   mkEField = value $ array (arrayDimension foldl' (arrayValue mkEValue))
 
-instance {-# OVERLAPPING #-} HasEValue a => HasEField (Vector (Maybe a)) where
+instance HasEValue a => HasEField (Vector (Maybe a)) where
   {-# INLINE mkEField #-}
   mkEField = value $ array (arrayDimension Vector.foldl' (arrayNullableValue mkEValue))
 
-instance {-# OVERLAPPING #-} HasEValue a => HasEField (Vector a) where
+instance HasEValue a => HasEField (Vector a) where
   {-# INLINE mkEField #-}
   mkEField = value $ array (arrayDimension Vector.foldl' (arrayValue mkEValue))
 
-instance {-# OVERLAPPING #-} HasEValue a => HasEField (Maybe a) where
+instance HasEValue a => HasEField (Maybe a) where
   {-# INLINE mkEField #-}
   mkEField = nullableValue mkEValue
 
-instance {-# OVERLAPPABLE #-} HasEValue a => HasEField a where
+instance HasEValue a => HasEField a where
   {-# INLINE mkEField #-}
   mkEField = value mkEValue
 

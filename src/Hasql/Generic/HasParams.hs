@@ -19,7 +19,7 @@ module Hasql.Generic.HasParams
     , mkEField
     , mkEValue
     , gParams
-    , gEValue
+    , gEEnumValue
     ) where
 
 --------------------------------------------------------------------------------
@@ -117,10 +117,10 @@ class (a ~ b) => Equal a b
 instance (a ~ b) => Equal a b
 
 --------------------------------------------------------------------------------
--- | Derive a 'HasEField' for enumeration types
-gEValue :: (Generic a, All (Equal '[]) (Code a)) => NP (K Text) (Code a) -> Params a
-gEValue names =
-  value (contramap (hcollapse . hzipWith const names . unSOP . from) text)
+-- | Derive a 'HasEValue' for enumeration types
+gEEnumValue :: (Generic a, All (Equal '[]) (Code a)) => NP (K Text) (Code a) -> Value a
+gEEnumValue names =
+  enum $ hcollapse . hzipWith const names . unSOP . from
 
 --------------------------------------------------------------------------------
 -- Instances for common data types

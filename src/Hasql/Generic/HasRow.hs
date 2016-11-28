@@ -18,7 +18,7 @@ module Hasql.Generic.HasRow
     , mkDField
     , mkDValue
     , gRow
-    , gDValue
+    , gDEnumValue
     ) where
 
 --------------------------------------------------------------------------------
@@ -112,11 +112,8 @@ instance (a ~ b) => Equal a b
 
 --------------------------------------------------------------------------------
 -- | Derive a 'HasDField' for enumeration types
-gDValue :: (Generic a, All (Equal '[]) (Code a)) => NP (K Text) (Code a) -> Row a
-gDValue names =
-  value text >>= \ n -> case Map.lookup n table of
-    Nothing -> fail "unknown constructor"
-    Just v  -> return v
+gDEnumValue :: (Generic a, All (Equal '[]) (Code a)) => NP (K Text) (Code a) -> Value a
+gDEnumValue names = enum $ \n -> Map.lookup n table
   where
     table =
       Map.fromList
@@ -126,6 +123,7 @@ gDValue names =
             names injections
           )
         )
+
 
 --------------------------------------------------------------------------------
 -- Instances for common data types

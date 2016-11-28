@@ -214,27 +214,27 @@ instance HasDValue JSON.Value where
 
 
 --------------------------------------------------------------------------------
-instance HasDValue a => HasDField [Maybe a] where
+instance {-# OVERLAPPING #-} HasDValue a => HasDField [Maybe a] where
   {-# INLINE mkDField #-}
   mkDField = value $ array (arrayDimension replicateM (arrayNullableValue mkDValue))
 
-instance HasDValue a => HasDField [a] where
+instance {-# OVERLAPPING #-} HasDValue a => HasDField [a] where
   {-# INLINE mkDField #-}
   mkDField = value $ array (arrayDimension replicateM (arrayValue mkDValue))
 
-instance HasDValue a => HasDField (Vector (Maybe a)) where
+instance {-# OVERLAPPING #-} HasDValue a => HasDField (Vector (Maybe a)) where
   {-# INLINE mkDField #-}
   mkDField = value $ array (arrayDimension Vector.replicateM (arrayNullableValue mkDValue))
 
-instance HasDValue a => HasDField (Vector a) where
+instance {-# OVERLAPPING #-} HasDValue a => HasDField (Vector a) where
   {-# INLINE mkDField #-}
   mkDField = value $ array (arrayDimension Vector.replicateM (arrayValue mkDValue))
 
-instance HasDValue a => HasDField (Maybe a) where
+instance {-# OVERLAPPING #-} HasDValue a => HasDField (Maybe a) where
   {-# INLINE mkDField #-}
   mkDField = nullableValue mkDValue
 
-instance HasDValue a => HasDField a where
+instance {-# OVERLAPPABLE #-} HasDValue a => HasDField a where
   {-# INLINE mkDField #-}
   mkDField = value mkDValue
 

@@ -1,5 +1,5 @@
 name:                hasql-generic
-version:             0.1.0.1
+version:             0.1.0.2
 synopsis:            Generic encoder and decoder deriving for Hasql
 description:         Please see README.md
 homepage:            https://github.com/chris-kahn/hasql-generic#readme

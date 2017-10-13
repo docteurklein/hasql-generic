@@ -1,4 +1,4 @@
---------------------------------------------------------------------------------
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE DataKinds             #-}
 {-# LANGUAGE DefaultSignatures     #-}
 {-# LANGUAGE DeriveGeneric         #-}
@@ -257,3 +257,32 @@ instance HasEField (Maybe Word32) where
 instance HasEField (Maybe Word64) where
   {-# INLINE mkEField #-}
   mkEField = contramap (fmap fromIntegral) (nullableValue int8)
+
+#define HASPARAMS(T) instance (Code T ~ '[xs], All HasEField xs) => HasParams T
+
+instance HasParams ()
+HASPARAMS((a,b))
+HASPARAMS((a,b,c))
+HASPARAMS((a,b,c,d))
+HASPARAMS((a,b,c,d,e))
+HASPARAMS((a,b,c,d,e,f))
+HASPARAMS((a,b,c,d,e,f,g))
+HASPARAMS((a,b,c,d,e,f,g,h))
+HASPARAMS((a,b,c,d,e,f,g,h,i))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m,n))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y))
+HASPARAMS((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z))

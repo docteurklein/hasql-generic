@@ -1,4 +1,4 @@
---------------------------------------------------------------------------------
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE DataKinds             #-}
 {-# LANGUAGE DefaultSignatures     #-}
 {-# LANGUAGE FlexibleContexts      #-}
@@ -11,6 +11,7 @@
 {-# LANGUAGE TypeFamilies          #-}
 {-# LANGUAGE TypeOperators         #-}
 {-# LANGUAGE UndecidableInstances  #-}
+
 module Hasql.Generic.HasRow
     ( HasRow
     , HasDField
@@ -41,7 +42,11 @@ import           Data.Word                  (Word16, Word32, Word64)
 import           Generics.SOP
 import qualified GHC.Generics               as GHC
 import           Hasql.Decoders
+#if MIN_VERSION_postgresql_binary(0,12,1)
+import qualified PostgreSQL.Binary.Decoding  as Decoder
+#else
 import qualified PostgreSQL.Binary.Decoder  as Decoder
+#endif
 
 --------------------------------------------------------------------------------
 -- |
@@ -260,3 +265,32 @@ word4 = custom $ \b -> BinaryParser.run Decoder.int
 --------------------------------------------------------------------------------
 word8 :: Value Word64
 word8 = custom $ \b -> BinaryParser.run Decoder.int
+
+#define HASROW(T) instance (Code T ~ '[xs], All HasDField xs) => HasRow T
+
+instance HasRow ()
+HASROW((a,b))
+HASROW((a,b,c))
+HASROW((a,b,c,d))
+HASROW((a,b,c,d,e))
+HASROW((a,b,c,d,e,f))
+HASROW((a,b,c,d,e,f,g))
+HASROW((a,b,c,d,e,f,g,h))
+HASROW((a,b,c,d,e,f,g,h,i))
+HASROW((a,b,c,d,e,f,g,h,i,j))
+HASROW((a,b,c,d,e,f,g,h,i,j,k))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m,n))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y))
+HASROW((a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z))

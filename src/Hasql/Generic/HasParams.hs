@@ -1,4 +1,3 @@
---------------------------------------------------------------------------------
 {-# LANGUAGE DataKinds             #-}
 {-# LANGUAGE DefaultSignatures     #-}
 {-# LANGUAGE DeriveGeneric         #-}
@@ -257,3 +256,29 @@ instance HasEField (Maybe Word32) where
 instance HasEField (Maybe Word64) where
   {-# INLINE mkEField #-}
   mkEField = contramap (fmap fromIntegral) (nullableValue int8)
+
+instance All HasEField [a,b] => HasParams (a,b)
+instance All HasEField [a,b,c] => HasParams (a,b,c)
+instance All HasEField [a,b,c,d] => HasParams (a,b,c,d)
+instance All HasEField [a,b,c,d,e] => HasParams (a,b,c,d,e)
+instance All HasEField [a,b,c,d,e,f] => HasParams (a,b,c,d,e,f)
+instance All HasEField [a,b,c,d,e,f,g] => HasParams (a,b,c,d,e,f,g)
+instance All HasEField [a,b,c,d,e,f,g,h] => HasParams (a,b,c,d,e,f,g,h)
+instance All HasEField [a,b,c,d,e,f,g,h,i] => HasParams (a,b,c,d,e,f,g,h,i)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j] => HasParams (a,b,c,d,e,f,g,h,i,j)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k] => HasParams (a,b,c,d,e,f,g,h,i,j,k)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m,n] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m,n)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y)
+instance All HasEField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z] => HasParams (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z)

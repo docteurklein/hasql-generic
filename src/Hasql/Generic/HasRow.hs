@@ -1,4 +1,4 @@
---------------------------------------------------------------------------------
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE DataKinds             #-}
 {-# LANGUAGE DefaultSignatures     #-}
 {-# LANGUAGE FlexibleContexts      #-}
@@ -11,6 +11,7 @@
 {-# LANGUAGE TypeFamilies          #-}
 {-# LANGUAGE TypeOperators         #-}
 {-# LANGUAGE UndecidableInstances  #-}
+
 module Hasql.Generic.HasRow
     ( HasRow
     , HasDField
@@ -41,7 +42,11 @@ import           Data.Word                  (Word16, Word32, Word64)
 import           Generics.SOP
 import qualified GHC.Generics               as GHC
 import           Hasql.Decoders
+#if MIN_VERSION_postgresql_binary(0,12,1)
+import qualified PostgreSQL.Binary.Decoding  as Decoder
+#else
 import qualified PostgreSQL.Binary.Decoder  as Decoder
+#endif
 
 --------------------------------------------------------------------------------
 -- |
@@ -260,3 +265,32 @@ word4 = custom $ \b -> BinaryParser.run Decoder.int
 --------------------------------------------------------------------------------
 word8 :: Value Word64
 word8 = custom $ \b -> BinaryParser.run Decoder.int
+
+#define HASROW(T) instance (Code T ~ '[xs], All HasDField xs) => HasRow T
+
+instance HasRow ()
+instance All HasDField [a,b] => HasRow (a,b)
+instance All HasDField [a,b,c] => HasRow (a,b,c)
+instance All HasDField [a,b,c,d] => HasRow (a,b,c,d)
+instance All HasDField [a,b,c,d,e] => HasRow (a,b,c,d,e)
+instance All HasDField [a,b,c,d,e,f] => HasRow (a,b,c,d,e,f)
+instance All HasDField [a,b,c,d,e,f,g] => HasRow (a,b,c,d,e,f,g)
+instance All HasDField [a,b,c,d,e,f,g,h] => HasRow (a,b,c,d,e,f,g,h)
+instance All HasDField [a,b,c,d,e,f,g,h,i] => HasRow (a,b,c,d,e,f,g,h,i)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j] => HasRow (a,b,c,d,e,f,g,h,i,j)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k] => HasRow (a,b,c,d,e,f,g,h,i,j,k)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m,n] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m,n)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y)
+instance All HasDField [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z] => HasRow (a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z)

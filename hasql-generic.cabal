@@ -18,17 +18,17 @@ library
   exposed-modules:     Hasql.Generic.HasRow
                      , Hasql.Generic.HasParams
   build-depends:       base >= 4.7 && < 5
-                     , aeson >= 0.11 && < 1.2
+                     , aeson >= 0.11 && < 1.3
                      , binary-parser >= 0.5 && < 0.6
                      , bytestring >= 0.10 && < 0.11
                      , containers >= 0.5 && < 0.6
                      , contravariant >= 1.4 && < 1.5
                      , generics-sop >= 0.2 && < 0.4
-                     , hasql >= 0.19 && < 0.20
+                     , hasql >= 0.19 && < 1.2
                      , postgresql-binary >= 0.9 && < 0.13
                      , scientific >= 0.3 && < 0.4
                      , text >= 1.2 && < 1.3
-                     , time >= 1.6 && < 1.8
+                     , time >= 1.6 && < 1.9
                      , uuid >= 1.3 && < 1.4
                      , vector >= 0.11 && < 0.13
   default-language:    Haskell2010

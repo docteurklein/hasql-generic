@@ -1,5 +1,5 @@
 name:                hasql-generic
-version:             0.1.0.4
+version:             0.1.0.5
 synopsis:            Generic encoder and decoder deriving for Hasql
 description:         Please see README.md
 homepage:            https://github.com/chris-kahn/hasql-generic#readme
@@ -7,7 +7,7 @@ license:             BSD3
 license-file:        LICENSE
 author:              Chris Kahn
 maintainer:          chris@kahn.pro
-copyright:           2016 Chris Kahn
+copyright:           2017 Chris Kahn
 category:            Web
 build-type:          Simple
 -- extra-source-files:

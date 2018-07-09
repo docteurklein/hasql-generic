@@ -201,61 +201,61 @@ instance HasEValue JSON.Value where
 --------------------------------------------------------------------------------
 instance HasEValue a => HasEField [Maybe a] where
   {-# INLINE mkEField #-}
-  mkEField = value $ array (arrayDimension foldl' (arrayNullableValue mkEValue))
+  mkEField = param $ array (dimension foldl' (nullableElement mkEValue))
 
 instance HasEValue a => HasEField [a] where
   {-# INLINE mkEField #-}
-  mkEField = value $ array (arrayDimension foldl' (arrayValue mkEValue))
+  mkEField = param $ array (dimension foldl' (element mkEValue))
 
 instance HasEValue a => HasEField (Vector (Maybe a)) where
   {-# INLINE mkEField #-}
-  mkEField = value $ array (arrayDimension Vector.foldl' (arrayNullableValue mkEValue))
+  mkEField = param $ array (dimension Vector.foldl' (nullableElement mkEValue))
 
 instance HasEValue a => HasEField (Vector a) where
   {-# INLINE mkEField #-}
-  mkEField = value $ array (arrayDimension Vector.foldl' (arrayValue mkEValue))
+  mkEField = param $ array (dimension Vector.foldl' (element mkEValue))
 
 instance HasEValue a => HasEField (Maybe a) where
   {-# INLINE mkEField #-}
-  mkEField = nullableValue mkEValue
+  mkEField = nullableParam mkEValue
 
 instance HasEValue a => HasEField a where
   {-# INLINE mkEField #-}
-  mkEField = value mkEValue
+  mkEField = param mkEValue
 
 
 --------------------------------------------------------------------------------
 instance HasEField Int where
   {-# INLINE mkEField #-}
-  mkEField = contramap fromIntegral (value int8)
+  mkEField = contramap fromIntegral (param int8)
 
 instance HasEField (Maybe Int) where
   {-# INLINE mkEField #-}
-  mkEField = contramap (fmap fromIntegral) (nullableValue int8)
+  mkEField = contramap (fmap fromIntegral) (nullableParam int8)
 
 instance HasEField Word16 where
   {-# INLINE mkEField #-}
-  mkEField = contramap fromIntegral (value int2)
+  mkEField = contramap fromIntegral (param int2)
 
 instance HasEField Word32 where
   {-# INLINE mkEField #-}
-  mkEField = contramap fromIntegral (value int4)
+  mkEField = contramap fromIntegral (param int4)
 
 instance HasEField Word64 where
   {-# INLINE mkEField #-}
-  mkEField = contramap fromIntegral (value int8)
+  mkEField = contramap fromIntegral (param int8)
 
 instance HasEField (Maybe Word16) where
   {-# INLINE mkEField #-}
-  mkEField = contramap (fmap fromIntegral) (nullableValue int2)
+  mkEField = contramap (fmap fromIntegral) (nullableParam int2)
 
 instance HasEField (Maybe Word32) where
   {-# INLINE mkEField #-}
-  mkEField = contramap (fmap fromIntegral) (nullableValue int4)
+  mkEField = contramap (fmap fromIntegral) (nullableParam int4)
 
 instance HasEField (Maybe Word64) where
   {-# INLINE mkEField #-}
-  mkEField = contramap (fmap fromIntegral) (nullableValue int8)
+  mkEField = contramap (fmap fromIntegral) (nullableParam int8)
 
 instance All HasEField [a,b] => HasParams (a,b)
 instance All HasEField [a,b,c] => HasParams (a,b,c)

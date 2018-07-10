@@ -222,37 +222,37 @@ instance HasDValue JSON.Value where
 --------------------------------------------------------------------------------
 instance HasDValue a => HasDField [Maybe a] where
   {-# INLINE mkDField #-}
-  mkDField = value $ array (arrayDimension replicateM (arrayNullableValue mkDValue))
+  mkDField = column $ array (dimension replicateM (nullableElement mkDValue))
 
 instance HasDValue a => HasDField [a] where
   {-# INLINE mkDField #-}
-  mkDField = value $ array (arrayDimension replicateM (arrayValue mkDValue))
+  mkDField = column $ array (dimension replicateM (element mkDValue))
 
 instance HasDValue a => HasDField (Vector (Maybe a)) where
   {-# INLINE mkDField #-}
-  mkDField = value $ array (arrayDimension Vector.replicateM (arrayNullableValue mkDValue))
+  mkDField = column $ array (dimension Vector.replicateM (nullableElement mkDValue))
 
 instance HasDValue a => HasDField (Vector a) where
   {-# INLINE mkDField #-}
-  mkDField = value $ array (arrayDimension Vector.replicateM (arrayValue mkDValue))
+  mkDField = column $ array (dimension Vector.replicateM (element mkDValue))
 
 instance HasDValue a => HasDField (Maybe a) where
   {-# INLINE mkDField #-}
-  mkDField = nullableValue mkDValue
+  mkDField = nullableColumn mkDValue
 
 instance HasDValue a => HasDField a where
   {-# INLINE mkDField #-}
-  mkDField = value mkDValue
+  mkDField = column mkDValue
 
 
 --------------------------------------------------------------------------------
 instance HasDField Int where
   {-# INLINE mkDField #-}
-  mkDField = fmap fromIntegral (value int8)
+  mkDField = fmap fromIntegral (column int8)
 
 instance HasDField (Maybe Int) where
   {-# INLINE mkDField #-}
-  mkDField = fmap (fmap fromIntegral) (nullableValue int8)
+  mkDField = fmap (fmap fromIntegral) (nullableColumn int8)
 
 --------------------------------------------------------------------------------
 word2 :: Value Word16

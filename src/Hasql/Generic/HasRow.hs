@@ -222,37 +222,37 @@ instance HasDValue JSON.Value where
 --------------------------------------------------------------------------------
 instance HasDValue a => HasDField [Maybe a] where
   {-# INLINE mkDField #-}
-  mkDField = column $ array (dimension replicateM (nullableElement mkDValue))
+  mkDField = column . nonNullable $ array (dimension replicateM (element . nullable $ mkDValue))
 
 instance HasDValue a => HasDField [a] where
   {-# INLINE mkDField #-}
-  mkDField = column $ array (dimension replicateM (element mkDValue))
+  mkDField = column .nonNullable $ array (dimension replicateM (element .nonNullable $ mkDValue))
 
 instance HasDValue a => HasDField (Vector (Maybe a)) where
   {-# INLINE mkDField #-}
-  mkDField = column $ array (dimension Vector.replicateM (nullableElement mkDValue))
+  mkDField = column . nonNullable $ array (dimension Vector.replicateM (element . nullable  $ mkDValue))
 
 instance HasDValue a => HasDField (Vector a) where
   {-# INLINE mkDField #-}
-  mkDField = column $ array (dimension Vector.replicateM (element mkDValue))
+  mkDField = column . nonNullable $ array (dimension Vector.replicateM (element . nonNullable $ mkDValue))
 
 instance HasDValue a => HasDField (Maybe a) where
   {-# INLINE mkDField #-}
-  mkDField = nullableColumn mkDValue
+  mkDField = column . nullable $ mkDValue
 
 instance HasDValue a => HasDField a where
   {-# INLINE mkDField #-}
-  mkDField = column mkDValue
+  mkDField = column . nonNullable $ mkDValue
 
 
 --------------------------------------------------------------------------------
 instance HasDField Int where
   {-# INLINE mkDField #-}
-  mkDField = fmap fromIntegral (column int8)
+  mkDField = fmap fromIntegral (column . nonNullable $  int8)
 
 instance HasDField (Maybe Int) where
   {-# INLINE mkDField #-}
-  mkDField = fmap (fmap fromIntegral) (nullableColumn int8)
+  mkDField = fmap (fmap fromIntegral) (column . nullable $ int8)
 
 --------------------------------------------------------------------------------
 word2 :: Value Word16

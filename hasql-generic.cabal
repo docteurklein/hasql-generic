@@ -18,7 +18,7 @@ library
   exposed-modules:     Hasql.Generic.HasRow
                      , Hasql.Generic.HasParams
   build-depends:       base >= 4.7 && < 5
-                     , aeson >= 0.11 && < 1.5
+                     , aeson >= 0.11 && < 1.5.7
                      , binary-parser >= 0.5 && < 0.6
                      , bytestring >= 0.10 && < 0.11
                      , containers >= 0.5 && < 0.7
